@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const SECRET = "@#%^(*!^#(*&^(!@*#@";
-
+// contains essential information about the user like the roleId,isBlocked,userId
 function createToken(userId) {
   const token = jwt.sign({ id: userId }, SECRET, {
     expiresIn: 86400 // expires in 24 hours

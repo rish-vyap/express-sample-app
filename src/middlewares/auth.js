@@ -1,10 +1,26 @@
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-
 const SECRET_KEY = "your-secret-key"; // Remember to store key securely
 
+
+
+// Middleware function for checking role(RBAC controls)
+function checkRole(role) {
+  return function (req, res, next) {
+    const user = users.find(user => user.id === req.userId);
+
+    if (user && user.role === role) {
+      next(); // Continue to the next middleware function
+    } else {
+      res.status(403).json({ message: 'Forbidden: You do not have the required role' });
+    }
+  };
+}
+
+
 // Middleware for checking the token
-function verifyToken(req, res, next) {
+function verifyToken(req, res, next) { 
+  // api-access-key is also a mandate to prevent backflow of data
   const token = req.headers["authorization"];
 
   if (!token) {
