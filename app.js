@@ -3,7 +3,6 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const db = require("./src/helperUtils/Dbconfig"); // assuming Database.js is in the same directory
 
 
 var indexRouter = require("./src/routes/index");
@@ -24,8 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 //app.use('/users', usersRouter);
-let connect =  db.getClient()
-console.log( connect);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

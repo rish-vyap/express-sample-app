@@ -12,7 +12,7 @@ dotenv.config({ path: `./config.env` }) // .${process.env.NODE_ENV}
 var app = require('../app');
 
 console.log('path:'+ `./.env.${process.env.NODE_ENV}`);
-console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('NODE_ENV:', dotenv.config({ path: `./config.env` }));
 
 /**
  * Get port from environment and store in Express.

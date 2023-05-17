@@ -41,6 +41,20 @@ function verifyToken(req, res, next) {
     next();
   });
 }
+
+
+// Middleware to verify guest token
+function verifyGuestToken(req,res,next) {
+  const guestToken = req.headers["X-Guest-Token"];
+  if (!token) {
+    return res.status(403).send({ message: "No token provided" });
+  }
+
+ if(guestToken === process.env.GUEST_TOKEN)
+ next();
+ else
+ return res.status(500).send({ message: "Failed to authenticate token." });
+}
   
-module.exports ={verifyToken} ;
+module.exports ={verifyToken,verifyGuestToken} ;
   
